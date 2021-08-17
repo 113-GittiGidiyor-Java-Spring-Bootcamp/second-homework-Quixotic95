@@ -2,3 +2,15 @@
 ### Not : ARAŞTIRMA KONUSU kısmı tamamıyla sizleri geliştirmek amaçlı , eklenmiştir , o madde için herhangi bir kod vs örneğine ihtiyaç yoktur.
 
 ![homework](https://user-images.githubusercontent.com/45206582/129493929-01f3b3a7-793f-4057-959a-ac5fb05ad8a8.png)
+
+## Example JSON for Student Post Method
+
+```json
+{
+"firstName":"Emre",
+"lastName":"OGUZ",
+"address":"Istanbul, Turkey",
+"birthDate":"1995-07-26",
+"gender":"MALE"
+}
+```
