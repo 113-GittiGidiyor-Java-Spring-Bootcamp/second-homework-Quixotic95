@@ -23,4 +23,10 @@ public class VisitingResearcher extends Instructor {
         this.hourlySalary = hourlySalary;
     }
 
+    @Override
+    public String toString() {
+        return "VisitingResearcher{" +
+                "hourlySalary=" + hourlySalary +
+                "} " + super.toString();
+    }
 }

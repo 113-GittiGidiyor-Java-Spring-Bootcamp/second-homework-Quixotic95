@@ -54,4 +54,12 @@ public class Student extends Person {
         this.studentCourses = studentCourses;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "birthDate=" + birthDate +
+                ", gender=" + gender +
+                ", studentCourses=" + studentCourses +
+                "} " + super.toString();
+    }
 }

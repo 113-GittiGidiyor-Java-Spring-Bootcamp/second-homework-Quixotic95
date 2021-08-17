@@ -37,4 +37,11 @@ public abstract class Instructor extends Person {
         this.instructorCourses = instructorCourses;
     }
 
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", instructorCourses=" + instructorCourses +
+                "} " + super.toString();
+    }
 }

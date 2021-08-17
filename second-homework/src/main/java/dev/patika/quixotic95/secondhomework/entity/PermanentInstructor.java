@@ -23,4 +23,10 @@ public class PermanentInstructor extends Instructor {
         this.fixedSalary = fixedSalary;
     }
 
+    @Override
+    public String toString() {
+        return "PermanentInstructor{" +
+                "fixedSalary=" + fixedSalary +
+                "} " + super.toString();
+    }
 }
