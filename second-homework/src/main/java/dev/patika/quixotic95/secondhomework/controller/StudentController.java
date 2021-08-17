@@ -3,6 +3,8 @@ package dev.patika.quixotic95.secondhomework.controller;
 import dev.patika.quixotic95.secondhomework.entity.Student;
 import dev.patika.quixotic95.secondhomework.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,23 +21,23 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public List<Student> findAllStudents() {
-        return studentService.findAll();
+    public ResponseEntity<List<Student>> findAllStudents() {
+        return new ResponseEntity<>(studentService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/students/{studentId}")
-    public Student findStudentById(@PathVariable int studentId) {
-        return studentService.findById(studentId);
+    public ResponseEntity<Student> findStudentById(@PathVariable int studentId) {
+        return new ResponseEntity<>(studentService.findById(studentId), HttpStatus.OK);
     }
 
     @PostMapping("/students")
-    public Student saveStudent(@RequestBody Student student){
-        return studentService.save(student);
+    public ResponseEntity<Student> saveStudent(@RequestBody Student student){
+        return new ResponseEntity<>(studentService.save(student),HttpStatus.OK);
     }
 
     @PutMapping("/students")
-    public Student updateStudent(@RequestBody Student student) {
-        return studentService.save(student);
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
+        return new ResponseEntity<>(studentService.save(student),HttpStatus.OK);
     }
 
     @DeleteMapping("/students")
