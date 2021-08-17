@@ -41,15 +41,15 @@ public class StudentController {
     }
 
     @DeleteMapping("/students")
-    public String deleteStudent(@RequestBody Student student) {
+    public ResponseEntity<String> deleteStudent(@RequestBody Student student) {
         studentService.delete(student);
-        return "Deleted student: " + student.toString();
+        return new ResponseEntity<>("Deleted student: " + student.toString(), HttpStatus.OK);
     }
 
     @DeleteMapping("/students/{studentId}")
-    public String deleteStudent(@PathVariable int studentId) {
+    public ResponseEntity<String> deleteStudent(@PathVariable int studentId) {
         studentService.deleteById(studentId);
-        return "Deleted student id - " + studentId;
+        return new ResponseEntity<>("Deleted student id - " + studentId, HttpStatus.OK);
     }
 
 }
