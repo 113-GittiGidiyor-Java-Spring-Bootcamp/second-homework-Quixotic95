@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@JsonIdentityInfo(scope = Course.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(scope = Course.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Course {
 
     @Id
@@ -26,7 +26,7 @@ public class Course {
     )
     private Set<Student> courseStudents = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "instructor_id")
     private Instructor courseInstructor;
 
@@ -104,4 +104,5 @@ public class Course {
                 ", creditScore=" + creditScore +
                 '}';
     }
+
 }

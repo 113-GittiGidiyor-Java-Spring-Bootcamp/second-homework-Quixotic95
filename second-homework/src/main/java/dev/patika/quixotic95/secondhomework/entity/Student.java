@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@JsonIdentityInfo(scope = Student.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = Student.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Student extends Person {
 
     @Id
@@ -74,4 +74,5 @@ public class Student extends Person {
                 ", studentCourses=" + studentCourses +
                 "} " + super.toString();
     }
+
 }
