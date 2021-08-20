@@ -1,17 +1,9 @@
 package dev.patika.quixotic95.secondhomework.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.util.Objects;
 
 @MappedSuperclass
 public abstract class Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     private String firstName, lastName, address;
 
@@ -46,23 +38,6 @@ public abstract class Person {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return id == person.id && firstName.equals(person.firstName) && lastName.equals(person.lastName) && address.equals(person.address);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address);
     }
 
     @Override

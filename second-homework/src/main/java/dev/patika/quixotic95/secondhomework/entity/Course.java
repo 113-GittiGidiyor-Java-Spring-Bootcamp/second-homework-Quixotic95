@@ -1,9 +1,13 @@
 package dev.patika.quixotic95.secondhomework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@JsonIdentityInfo(scope = Course.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Course {
 
     @Id
@@ -14,10 +18,16 @@ public class Course {
     private String courseCode;
     private double creditScore;
 
-    @ManyToMany(mappedBy = "studentCourses")
+    @ManyToMany
+    @JoinTable(
+            name = "student_course",
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+    )
     private Set<Student> courseStudents = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "instructor_id")
     private Instructor courseInstructor;
 
     public Course() {
