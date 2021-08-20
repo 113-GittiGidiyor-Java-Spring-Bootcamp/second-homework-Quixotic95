@@ -29,4 +29,5 @@ public class VisitingResearcher extends Instructor {
                 "hourlySalary=" + hourlySalary +
                 "} " + super.toString();
     }
+
 }

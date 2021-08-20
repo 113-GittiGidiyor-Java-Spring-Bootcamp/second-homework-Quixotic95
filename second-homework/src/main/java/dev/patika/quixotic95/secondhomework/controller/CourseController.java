@@ -31,13 +31,13 @@ public class CourseController {
     }
 
     @PostMapping("/courses")
-    public ResponseEntity<Course> saveCourse(@RequestBody Course course){
-        return new ResponseEntity<>(courseService.save(course),HttpStatus.OK);
+    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
+        return new ResponseEntity<>(courseService.save(course), HttpStatus.OK);
     }
 
     @PutMapping("/courses")
     public ResponseEntity<Course> updateCourse(@RequestBody Course course) {
-        return new ResponseEntity<>(courseService.save(course),HttpStatus.OK);
+        return new ResponseEntity<>(courseService.save(course), HttpStatus.OK);
     }
 
     @DeleteMapping("/courses")

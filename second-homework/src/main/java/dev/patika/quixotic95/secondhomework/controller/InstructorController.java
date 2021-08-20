@@ -31,13 +31,13 @@ public class InstructorController {
     }
 
     @PostMapping("/instructors")
-    public ResponseEntity<Instructor> saveInstructor(@RequestBody Instructor instructor){
-        return new ResponseEntity<>(instructorService.save(instructor),HttpStatus.OK);
+    public ResponseEntity<Instructor> saveInstructor(@RequestBody Instructor instructor) {
+        return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.OK);
     }
 
     @PutMapping("/instructors")
     public ResponseEntity<Instructor> updateInstructor(@RequestBody Instructor instructor) {
-        return new ResponseEntity<>(instructorService.save(instructor),HttpStatus.OK);
+        return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.OK);
     }
 
     @DeleteMapping("/instructors")
@@ -51,4 +51,5 @@ public class InstructorController {
         instructorService.deleteById(instructorId);
         return new ResponseEntity<>("Deleted instructor id - " + instructorId, HttpStatus.OK);
     }
+
 }

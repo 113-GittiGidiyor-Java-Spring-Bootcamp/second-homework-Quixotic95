@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class InstructorDAOJPAImpl implements InstructorDAO{
+public class InstructorDAOJPAImpl implements InstructorDAO {
 
     private EntityManager entityManager;
 
@@ -42,4 +42,5 @@ public class InstructorDAOJPAImpl implements InstructorDAO{
         Instructor entity = findById(id);
         entityManager.remove(entity);
     }
+
 }

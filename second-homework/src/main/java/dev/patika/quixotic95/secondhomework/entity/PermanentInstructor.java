@@ -29,4 +29,5 @@ public class PermanentInstructor extends Instructor {
                 "fixedSalary=" + fixedSalary +
                 "} " + super.toString();
     }
+    
 }

@@ -47,4 +47,5 @@ public class StudentService implements GenericService<Student> {
     public void deleteById(int studentId) {
         studentDAO.deleteById(studentId);
     }
+
 }

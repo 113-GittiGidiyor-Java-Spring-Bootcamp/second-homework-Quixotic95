@@ -47,4 +47,5 @@ public class CourseService implements GenericService<Course> {
     public void deleteById(int courseId) {
         courseDAO.deleteById(courseId);
     }
+
 }

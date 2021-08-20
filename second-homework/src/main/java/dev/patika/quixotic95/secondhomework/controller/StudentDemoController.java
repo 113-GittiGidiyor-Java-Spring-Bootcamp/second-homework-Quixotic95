@@ -2,7 +2,6 @@ package dev.patika.quixotic95.secondhomework.controller;
 
 import dev.patika.quixotic95.secondhomework.entity.Gender;
 import dev.patika.quixotic95.secondhomework.entity.Student;
-import dev.patika.quixotic95.secondhomework.service.InstructorService;
 import dev.patika.quixotic95.secondhomework.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,4 +37,5 @@ public class StudentDemoController {
 
         return new ResponseEntity<>(studentService.findAll(), HttpStatus.OK);
     }
+
 }

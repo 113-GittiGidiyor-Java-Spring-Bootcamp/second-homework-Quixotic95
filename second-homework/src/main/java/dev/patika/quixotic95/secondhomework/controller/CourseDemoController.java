@@ -1,9 +1,6 @@
 package dev.patika.quixotic95.secondhomework.controller;
 
 import dev.patika.quixotic95.secondhomework.entity.Course;
-import dev.patika.quixotic95.secondhomework.entity.Instructor;
-import dev.patika.quixotic95.secondhomework.entity.PermanentInstructor;
-import dev.patika.quixotic95.secondhomework.entity.VisitingResearcher;
 import dev.patika.quixotic95.secondhomework.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +29,8 @@ public class CourseDemoController {
         courseService.save(new Course("Ataturk’s Principles and Turkish Revolution History", "ATA1001", 3));
         courseService.save(new Course("Basic Art Education", "MTP1001", 4));
         courseService.save(new Course("Fashion Picture and Illustration", "MTP1005", 5));
-        
+
         return new ResponseEntity<>(courseService.findAll(), HttpStatus.OK);
     }
+
 }

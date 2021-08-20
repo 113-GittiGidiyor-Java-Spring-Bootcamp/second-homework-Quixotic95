@@ -31,13 +31,13 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public ResponseEntity<Student> saveStudent(@RequestBody Student student){
-        return new ResponseEntity<>(studentService.save(student),HttpStatus.OK);
+    public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
+        return new ResponseEntity<>(studentService.save(student), HttpStatus.OK);
     }
 
     @PutMapping("/students")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
-        return new ResponseEntity<>(studentService.save(student),HttpStatus.OK);
+        return new ResponseEntity<>(studentService.save(student), HttpStatus.OK);
     }
 
     @DeleteMapping("/students")
