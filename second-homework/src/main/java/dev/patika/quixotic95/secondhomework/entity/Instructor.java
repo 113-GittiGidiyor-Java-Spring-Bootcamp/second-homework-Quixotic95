@@ -1,14 +1,19 @@
 package dev.patika.quixotic95.secondhomework.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = VisitingResearcher.class, name = "VisitingResearcher"),
+        @JsonSubTypes.Type(value = PermanentInstructor.class, name = "PermanentInstructor")
+})
 //@JsonIdentityInfo(scope = Instructor.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Instructor extends Person {
 
@@ -17,9 +22,6 @@ public class Instructor extends Person {
     private int id;
 
     private String phoneNumber;
-
-    @OneToMany(mappedBy = "courseInstructor", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private Set<Course> instructorCourses = new HashSet<>();
 
     public Instructor() {
     }
@@ -37,14 +39,6 @@ public class Instructor extends Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Course> getInstructorCourses() {
-        return instructorCourses;
-    }
-
-    public void setInstructorCourses(Set<Course> instructorCourses) {
-        this.instructorCourses = instructorCourses;
-    }
-
     public int getId() {
         return id;
     }
@@ -53,7 +47,7 @@ public class Instructor extends Person {
     public String toString() {
         return "Instructor{" +
                 "phoneNumber='" + phoneNumber + '\'' +
-                ", instructorCourses=" + instructorCourses +
                 "} " + super.toString();
     }
+
 }
