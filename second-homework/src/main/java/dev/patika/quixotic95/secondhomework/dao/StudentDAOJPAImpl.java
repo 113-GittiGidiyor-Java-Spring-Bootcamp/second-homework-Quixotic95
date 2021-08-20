@@ -34,7 +34,7 @@ public class StudentDAOJPAImpl implements StudentDAO{
 
     @Override
     public void delete(Student entity) {
-        entityManager.remove(save(entity));
+        entityManager.remove(entityManager.getReference(Student.class, entity.getId()));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package dev.patika.quixotic95.secondhomework.dao;
 
 import dev.patika.quixotic95.secondhomework.entity.Instructor;
-import dev.patika.quixotic95.secondhomework.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +34,7 @@ public class InstructorDAOJPAImpl implements InstructorDAO{
 
     @Override
     public void delete(Instructor entity) {
-        entityManager.remove(save(entity));
+        entityManager.remove(entityManager.getReference(Instructor.class, entity.getId()));
     }
 
     @Override

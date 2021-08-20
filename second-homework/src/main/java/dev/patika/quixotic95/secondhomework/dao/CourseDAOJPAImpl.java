@@ -34,7 +34,7 @@ public class CourseDAOJPAImpl implements CourseDAO {
 
     @Override
     public void delete(Course entity) {
-        entityManager.remove(save(entity));
+        entityManager.remove(entityManager.getReference(Course.class, entity.getId()));
     }
 
     @Override
