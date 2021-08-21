@@ -15,6 +15,7 @@ public class CourseController {
 
     private final CourseService courseService;
 
+    // dependency injection with @Autowired annotation (not necessary to write, injects automatically; but placed for better-reading)
     @Autowired
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
@@ -28,39 +29,56 @@ public class CourseController {
 
     // add mapping for GET /courses/{courseId} to get a course by id
     @GetMapping("/courses/{courseId}")
-    public ResponseEntity<Course> findCourseById(@PathVariable int courseId) {
-        return new ResponseEntity<>(courseService.findById(courseId), HttpStatus.OK);
+    public ResponseEntity<?> findCourseById(@PathVariable int courseId) {
+        Course foundCourse = courseService.findById(courseId);
+        if (foundCourse != null) {
+            return new ResponseEntity<>(foundCourse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Course with id: " + courseId + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for POST /courses - add new course
     @PostMapping("/courses")
-    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
-        return new ResponseEntity<>(courseService.save(course), HttpStatus.OK);
+    public ResponseEntity<?> saveCourse(@RequestBody Course course) {
+        if (courseService.findById(course.getId()) == null) {
+            return new ResponseEntity<>(courseService.save(course), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Course with id: " + course.getId() + " already exists on database.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for PUT /courses - update existing course
     @PutMapping("/courses")
-    public ResponseEntity<Course> updateCourse(@RequestBody Course course) {
-//        if(courseService.findById(course.getId()) == null) {
+    public ResponseEntity<?> updateCourse(@RequestBody Course course) {
+        if (courseService.findById(course.getId()) != null) {
             return new ResponseEntity<>(courseService.save(course), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<String>("Course with id: " + course.getId() + " not found.", HttpStatus.BAD_REQUEST);
-//        }
-
+        } else {
+            return new ResponseEntity<String>("Course with id: " + course.getId() + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for DELETE /courses - delete course
     @DeleteMapping("/courses")
     public ResponseEntity<String> deleteCourse(@RequestBody Course course) {
-        courseService.delete(course);
-        return new ResponseEntity<>("Deleted course: " + course.toString(), HttpStatus.OK);
+        Course foundCourse = courseService.findById(course.getId());
+        if (foundCourse != null) {
+            courseService.delete(course);
+            return new ResponseEntity<>("Deleted course: " + foundCourse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Course with id: " + course.getId() + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for DELETE /courses/{courseId} - delete course by id
     @DeleteMapping("/courses/{courseId}")
     public ResponseEntity<String> deleteCourse(@PathVariable int courseId) {
-        courseService.deleteById(courseId);
-        return new ResponseEntity<>("Deleted course id - " + courseId, HttpStatus.OK);
+        if (courseService.findById(courseId) != null) {
+            courseService.deleteById(courseId);
+            return new ResponseEntity<>("Deleted course id - " + courseId, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Course with id: " + courseId + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

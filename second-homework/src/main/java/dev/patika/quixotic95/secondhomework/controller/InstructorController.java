@@ -15,6 +15,7 @@ public class InstructorController {
 
     private final InstructorService instructorService;
 
+    // dependency injection with @Autowired annotation (not necessary to write, injects automatically; but placed for better-reading)
     @Autowired
     public InstructorController(InstructorService instructorService) {
         this.instructorService = instructorService;
@@ -28,34 +29,56 @@ public class InstructorController {
 
     // add mapping for GET /instructors/{instructorId} to get an instructor by id
     @GetMapping("/instructors/{instructorId}")
-    public ResponseEntity<Instructor> findInstructorById(@PathVariable int instructorId) {
-        return new ResponseEntity<>(instructorService.findById(instructorId), HttpStatus.OK);
+    public ResponseEntity<?> findInstructorById(@PathVariable int instructorId) {
+        Instructor foundInstructor = instructorService.findById(instructorId);
+        if (foundInstructor != null) {
+            return new ResponseEntity<>(foundInstructor, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Instructor with id: " + instructorId + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for POST /instructors - add new instructor
     @PostMapping("/instructors")
-    public ResponseEntity<Instructor> saveInstructor(@RequestBody Instructor instructor) {
-        return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.OK);
+    public ResponseEntity<?> saveInstructor(@RequestBody Instructor instructor) {
+        if (instructorService.findById(instructor.getId()) == null) {
+            return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Instructor with id: " + instructor.getId() + " already exists on database.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for PUT /instructors - update existing instructor
     @PutMapping("/instructors")
-    public ResponseEntity<Instructor> updateInstructor(@RequestBody Instructor instructor) {
-        return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.OK);
+    public ResponseEntity<?> updateInstructor(@RequestBody Instructor instructor) {
+        if (instructorService.findById(instructor.getId()) != null) {
+            return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Instructor with id: " + instructor.getId() + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for DELETE /instructors - delete instructor
     @DeleteMapping("/instructors")
     public ResponseEntity<String> deleteInstructor(@RequestBody Instructor instructor) {
-        instructorService.delete(instructor);
-        return new ResponseEntity<>("Deleted instructor: " + instructor.toString(), HttpStatus.OK);
+        Instructor foundInstructor = instructorService.findById(instructor.getId());
+        if (foundInstructor != null) {
+            instructorService.delete(instructor);
+            return new ResponseEntity<>("Deleted instructor: " + foundInstructor, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Instructor with id: " + instructor.getId() + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // add mapping for DELETE /instructors/{instructorId} - delete instructor by id
     @DeleteMapping("/instructors/{instructorId}")
     public ResponseEntity<String> deleteInstructor(@PathVariable int instructorId) {
-        instructorService.deleteById(instructorId);
-        return new ResponseEntity<>("Deleted instructor id - " + instructorId, HttpStatus.OK);
+        if (instructorService.findById(instructorId) != null) {
+            instructorService.deleteById(instructorId);
+            return new ResponseEntity<>("Deleted instructor id - " + instructorId, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Instructor with id: " + instructorId + " not found.", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
