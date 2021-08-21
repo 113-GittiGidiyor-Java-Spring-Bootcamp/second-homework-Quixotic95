@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CourseService implements GenericService<Course> {
 
-    CourseDAO courseDAO;
+    final CourseDAO courseDAO;
 
     @Autowired
     public CourseService(CourseDAO courseDAO) {

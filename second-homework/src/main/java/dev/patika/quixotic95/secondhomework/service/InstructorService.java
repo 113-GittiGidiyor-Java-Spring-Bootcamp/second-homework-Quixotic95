@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class InstructorService implements GenericService<Instructor> {
 
-    private InstructorDAO instructorDAO;
+    private final InstructorDAO instructorDAO;
 
     @Autowired
     public InstructorService(InstructorDAO instructorDAO) {

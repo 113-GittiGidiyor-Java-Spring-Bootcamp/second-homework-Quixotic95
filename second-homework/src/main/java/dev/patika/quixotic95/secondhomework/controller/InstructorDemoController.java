@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class InstructorDemoController {
 
-    InstructorService instructorService;
+    final InstructorService instructorService;
 
     @Autowired
     public InstructorDemoController(InstructorService instructorService) {

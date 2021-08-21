@@ -10,8 +10,10 @@ import java.util.List;
 @Repository
 public class InstructorDAOJPAImpl implements InstructorDAO {
 
-    private EntityManager entityManager;
+    // define field for EntityManager
+    private final EntityManager entityManager;
 
+    // set up constructor injection
     @Autowired
     public InstructorDAOJPAImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -19,16 +21,19 @@ public class InstructorDAOJPAImpl implements InstructorDAO {
 
     @Override
     public List<Instructor> findAll() {
+        // create a query & execute query and get result list & return the results
         return entityManager.createQuery("FROM Instructor i", Instructor.class).getResultList();
     }
 
     @Override
     public Instructor findById(int id) {
+        // find and return Instructor
         return entityManager.find(Instructor.class, id);
     }
 
     @Override
     public Instructor save(Instructor entity) {
+        // save and return the saved Instructor
         return entityManager.merge(entity);
     }
 
