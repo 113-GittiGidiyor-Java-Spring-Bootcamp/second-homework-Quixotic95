@@ -1,6 +1,7 @@
-# İkinci ödev teslim tarihi : 22 Ağustos - 23:00
+# Known Bugs
 
-### Not : ARAŞTIRMA KONUSU kısmı tamamıyla sizleri geliştirmek amaçlı , eklenmiştir , o madde için herhangi bir kod vs örneğine ihtiyaç yoktur.
+* While you sending a **DELETE REQUEST** with an **OBJECT** which has a **modified ID**, it deletes the **OBJECT that has the modified ID** instead of the **OBJECT itself**. *(An authorization problem due to business login more than a bug.)*
+* You can't delete an instructor if he/she is **instructing a course**. *(Business logic more than a bug. / Probably could be changed with cascade types.)*
 
 ![homework](https://user-images.githubusercontent.com/45206582/129493929-01f3b3a7-793f-4057-959a-ac5fb05ad8a8.png)
 
@@ -10,10 +11,10 @@
 
 ```json
 {
-  "firstName": "Emre",
-  "lastName": "OGUZ",
-  "address": "Istanbul, Turkey",
-  "birthDate": "1995-07-26",
+  "firstName": "Tolunay",
+  "lastName": "Tasdemir",
+  "address": "Ankara, Turkey",
+  "birthDate": "1995-01-01",
   "gender": "MALE"
 }
 ```
